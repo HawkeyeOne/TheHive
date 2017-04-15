@@ -16,6 +16,7 @@
                         <label uib-btn-radio="'csv'" class="btn btn-default btn-sm" name="format" ng-model="exportParams.format">CSV</label>
                         <label uib-btn-radio="'txt'" class="btn btn-default btn-sm" name="format" ng-model="exportParams.format">TEXT</label>
                         <label uib-btn-radio="'misp'" class="btn btn-default btn-sm" name="format" ng-model="exportParams.format">MISP</label>
+                        <label uib-btn-radio="'demisto'" class="btn btn-default btn-sm" name="format" ng-model="exportParams.format">DEMISTO</label>
                     </div>
                 </div>
                 <div class="form-group hpad10">
@@ -58,6 +59,16 @@
                 </table>
 
                 <table ng-switch-when="misp">
+                    <tr style="overflow: hidden" ng-repeat="el in selection.artifacts">
+                        <td width="200">
+							*{{getDataType(el)}}
+                        </td>
+                        <td>
+							:{{getObservableValue(el)}}
+                        </td>
+                    </tr>
+                </table>
+                <table ng-switch-when="demisto">
                     <tr style="overflow: hidden" ng-repeat="el in selection.artifacts">
                         <td width="200">
 							*{{getDataType(el)}}

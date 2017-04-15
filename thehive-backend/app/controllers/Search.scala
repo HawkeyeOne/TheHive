@@ -31,7 +31,7 @@ class SearchCtrl @Inject() (
     val nparent = request.body.getLong("nparent").getOrElse(0L).toInt
     val withStats = request.body.getBoolean("nstats").getOrElse(false)
 
-    val (entities, total) = findSrv(None, and(query, "status" ~!= "Deleted", not(or(ofType("audit"), ofType("data"), ofType("user"), ofType("analyzer"), ofType("misp")))), range, sort)
+    val (entities, total) = findSrv(None, and(query, "status" ~!= "Deleted", not(or(ofType("audit"), ofType("data"), ofType("user"), ofType("analyzer"), ofType("misp"), ofType("demisto")))), range, sort)
     val entitiesWithStats = auxSrv(entities, nparent, withStats, true)
     renderer.toOutput(OK, entitiesWithStats, total)
   }

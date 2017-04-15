@@ -48,6 +48,12 @@
                             <span class="badge alert-danger">{{mispEvents.count}}</span>
                         </a>
                     </li>
+		    <li ng-show="demistoEnabled === true" ui-sref-active="active">
+		    	<a href ui-sref="app.demisto-list">
+			   DEMISTO
+			   <span class="badge alert-danger">{{demistoEvents.count}}</span>
+			</a>
+		    </li>
                     <li class="hdivider hidden-xs"></li>
                     <li ui-sref-active="active">
                         <a ui-sref="app.statistics">

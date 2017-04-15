@@ -225,6 +225,12 @@ angular.module('thehive', ['ngAnimate', 'ngMessages', 'ui.bootstrap', 'ui.router
                 controller: 'MispListCtrl',
                 controllerAs: 'misp'
             });
+	    .state('app.demisto-list', {
+		url: 'demisto/list',
+		templateUrl: 'views/partials/demisto/list.html',
+		controller: 'DemistoListCtrl',
+		controllerAs: 'demisto'
+	    });
     })
     .config(function($httpProvider) {
         'use strict';

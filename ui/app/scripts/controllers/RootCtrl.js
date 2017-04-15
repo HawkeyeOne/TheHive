@@ -2,7 +2,7 @@
  * Controller for main page
  */
 angular.module('theHiveControllers').controller('RootCtrl',
-    function($scope, $uibModal, $location, $state, $base64, AuthenticationSrv, MispSrv, StreamSrv, StreamStatSrv, TemplateSrv, MetricsCacheSrv, AlertSrv) {
+    function($scope, $uibModal, $location, $state, $base64, AuthenticationSrv, DemistoSrv, MispSrv, StreamSrv, StreamStatSrv, TemplateSrv, MetricsCacheSrv, AlertSrv) {
         'use strict';
 
         $scope.querystring = '';
@@ -10,6 +10,8 @@ angular.module('theHiveControllers').controller('RootCtrl',
             data: 'currentcases'
         };
         $scope.mispEnabled = false;
+
+	$scope.demistoEnabled = false;
 
         StreamSrv.init();
         $scope.currentUser = AuthenticationSrv.current(function() {
@@ -50,6 +52,10 @@ angular.module('theHiveControllers').controller('RootCtrl',
 
             // Get MISP counts
             $scope.mispEvents = MispSrv.stats($scope);
+
+	    // Get DEMISTO counts
+	    $scope.demistoEvents = DemistoSrv.stats($scope);
+
         }, function(data, status) {
             AlertSrv.error('RootCtrl', data, status);
         });
@@ -69,9 +75,17 @@ angular.module('theHiveControllers').controller('RootCtrl',
             $scope.mispEvents = MispSrv.stats($scope);
         });
 
+	$scope.$on('demisto:event-imported', function() {
+	    $scope.demistoEvents = DemistoSrv.stats($scope);
+	});
+
         $scope.$on('misp:status-updated', function(event, enabled) {
             $scope.mispEnabled = enabled;
         });
+
+	$scope.$on('demisto:status-updated', function(event, enabled) {
+	    $scope.demistoEnabled = enabled;
+	});
 
         $scope.isAdmin = function(user) {
             var u = user;

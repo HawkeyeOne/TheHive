@@ -66,7 +66,9 @@ class Migration @Inject() (
         mapAttribute(Seq("case", "case_task", "case_task_log", "case_artifact", "audit", "case_artifact_job"), "startDate")(convertDate),
         mapAttribute(Seq("case", "case_task", "case_artifact_job"), "endDate")(convertDate),
         mapAttribute("misp", "date")(convertDate),
+        mapAttribute("demisto", "date")(convertDate),
         mapAttribute("misp", "publishDate")(convertDate),
+        mapAttribute("demisto", "publishDate")(convertDate),
         mapAttribute(_ ⇒ true, "createdAt", convertDate),
         mapAttribute(_ ⇒ true, "updatedAt", convertDate))
   }
